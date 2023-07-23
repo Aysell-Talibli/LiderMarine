@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %} {% trans 'Xidmətlər' %} {% endblock %}
+{% block content %}
+<section class="sidebar-page-container">
+    <div class="auto-container">
+        <div class="row clearfix">
+            <div class="col-lg-8 col-md-12 col-sm-12 content-side">
+                <div class="blog-details-content">
+                    <div class="service-details-content pad-0">
+                        <div class="inner-box">
+                            <div class="image-wrap">
+                                <figure class="image"><img src="{{service.image.url}}" alt=""></figure>
+                            </div>
+                            <div class="content-box">
+                                <h2>{{service.name}}</h2>
+                                <p class="service-text">{{service.description}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12 sidebar-side">
+                <div class="sidebar default-sidebar">
+                    <div class="sidebr-search">
+                        <form action="{% url 'service' %}" method="get" class="search-form">
+                            <div class="form-group">
+                                <input type="search" name="search-field" placeholder="Search" required="">
+                                <button type="submit" fdprocessedid="pmdq4h"><i
+                                        class="fa-solid fa-search"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="sidebar-widget categories-widget">
+                        <div class="widget-title">
+                            <h4>{% trans 'Digər Xidmətlər' %}</h4>
+                        </div>
+                        <div class="widget-content">
+                            <ul class="categories-list clearfix">
+                                {% for category in service_categories %}
+                                <li><a href="{% url 'service_category' category.name %}">{{category.name}}<span>{{ category.count }}</span></a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3 class="contact-links">Bizimlə Əlaqə</h3>
+                    <ul class="service-social-media clearfix">
+                        {% for app_name in apps %}
+                                {% if app_name.app == 'fb' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-facebook-f"></span></a></li>
+                                {% endif %}
+                                {% if app_name.app == 'wp' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-whatsapp"></span></a></li>
+                                {% endif %}
+                                {% if app_name.app == 'twitter' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-twitter"></span></a></li>
+                                {% endif %}
+                                {% if app_name.app == 'insta' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-instagram"></span></a></li>
+                                {% endif %}
+                                {% if app_name.app == 'linkedin' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-linkedin"></span></a></li>
+                                {% endif %}
+                                {% if app_name.app == 'tiktok' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-tiktok"></span></a></li>
+                                {% endif %}
+                                {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

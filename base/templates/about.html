@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %} {% trans 'Haqqımızda' %} {% endblock %}
+{% block content %}
+
+<section class="about-section">
+    <div class="auto-container">
+        <div class="row clearfix">
+            <div class="col-lg-6 col-md-12 col-sm-12 image-column">
+                <div class="image_block_1">
+                    <div class="image-box">
+                        <figure class="image"><img src="{{about_info.image.url}}" alt=""></figure>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 content-column">
+                <div class="content_block_1">
+                    <div class="content-box">
+                        <div class="sec-title">
+                            
+                        </div>
+                        <div class="text">
+                      {{about_info.text}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- about-section end -->
+<section class="clients-section bg-color-1">
+    <div class="auto-container">
+        <div class="sec-title text-center">
+            <h2>{% trans 'Partnyorlar' %}</h2>
+        </div>
+        <div class="clients-carousel owl-carousel owl-theme owl-nav-none owl-dots-none">
+            {% for partner in partners %}
+            <figure class="clients-logo-box"><a href="#"><img
+                        src="{{partner.image.url}}" alt=""></a></figure>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- newsletter-section -->
+
+{% endblock %}

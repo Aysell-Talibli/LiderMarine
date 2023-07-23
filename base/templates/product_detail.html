@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %} {% trans 'Məhsullar' %} {% endblock %}
+{% block content %}
+<section class="news-section pt-0">
+    <div class="auto-container">
+        <div class="sec-title text-center">
+            <h2>Məhsul-details</h2>
+        </div>
+
+        <div class="row clearfix">
+            <div class="col-lg-6 col-md-12 col-sm-12 content-side">
+                <div class="blog-details-content">
+                    <div class="">
+                        <div class="inner-box">
+                            <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
+                                class="swiper mySwiper2">
+                                <div class="swiper-wrapper">
+                                    {% for image in product.images.all %}
+                                    <div class="swiper-slide">
+                                        <img src="{{image.image.url}}" />
+                                    </div>
+                                    {% endfor %}
+                                    
+                                </div>
+                                <div class="swiper-button-next"></div>
+                                <div class="swiper-button-prev"></div>
+                            </div>
+                            <div thumbsSlider="" class="swiper mySwiper">
+                                <div class="swiper-wrapper">
+                                    {% for image in product.images.all %}
+                                    <div class="swiper-slide">
+                                        <img src="{{image.image.url}}" />
+                                    </div>
+                                    {% endfor %}
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 sidebar-side">
+                <div class="sidebar default-sidebar">
+                    <div class="section-title">
+                        <h3 class="title">{{product.name}}</h3>
+                    </div>
+                    <h4 class="media">Sosial Media</h4>
+                    <ul class="product-social-media clearfix">
+                        {% for app_name in apps %}
+                                {% if app_name.app == 'fb' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-facebook-f"></span></a></li>
+                                {% endif %}
+                                {% if app_name.app == 'wp' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-whatsapp"></span></a></li>
+                                {% endif %}
+                                {% if app_name.app == 'twitter' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-twitter"></span></a></li>
+                                {% endif %}
+                                {% if app_name.app == 'insta' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-instagram"></span></a></li>
+                                {% endif %}
+                                {% if app_name.app == 'linkedin' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-linkedin"></span></a></li>
+                                {% endif %}
+                                {% if app_name.app == 'tiktok' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-tiktok"></span></a></li>
+                                {% endif %}
+                                {% endfor %}
+                    </ul>
+
+                    <div class="">
+                        <p class="bottom-product-info">{{product.description}}
+
+                        </p>
+                    </div>
+                    <button type="submit" class="theme-btn-one request-btn"
+                        fdprocessedid="1gxihe">{% trans 'Müraciət' %}</button>
+                </div>
+            </div>
+        </div>
+        <div class="popup">
+            <div class="modal">
+                <span class="close-modal">
+                    <i class="fas fa-times"></i>
+                </span>
+                <div class="row">
+                    <div class="modal-content">
+                        <div class="form-box">
+                            <h3>{% trans 'Müraciət Edin' %}</h3>
+                            <form method="post" action="{% url 'product_detail' product.slug %}" id="contact-form" class="default-form"
+                                novalidate="novalidate">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <div class="field-inner">
+                                        <input type="text" name="name" placeholder="Ad Soyad *" required=""
+                                            aria-required="true" fdprocessedid="1ct0ge">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="field-inner">
+                                        <input type="email" name="email" placeholder="E-poçt *" required=""
+                                            aria-required="true" fdprocessedid="tzeyj">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="field-inner">
+                                        <div class="phone-wrap">
+                                            <span class="countrycode">+994</span>
+                                            <input type="text"  class="form-input" 
+                                                placeholder="(__) ___-__-__" id="phone" name="phone">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="lower-links clearfix">
+                                    <div class="link">
+                                        <button type="submit" class="theme-btn btn-style-one"
+                                                        >{% trans 'Göndər' %}</button>
+                                        
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

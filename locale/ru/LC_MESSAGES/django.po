@@ -1,0 +1,136 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-21 18:38+0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+#: .\base\models.py:21 .\base\models.py:42
+msgid "Ana sehifede gorunsun?"
+msgstr ""
+
+#: .\base\models.py:82
+msgid "Adi"
+msgstr ""
+
+#: .\base\templates\about.html:3 .\base\templates\base.html:108
+#: .\base\templates\base.html:241 .\base\templates\base.html:245
+#: .\base\templates\base.html:423
+msgid "Haqqımızda"
+msgstr ""
+
+#: .\base\templates\about.html:35 .\base\templates\home.html:159
+msgid "Partnyorlar"
+msgstr ""
+
+#: .\base\templates\base.html:105 .\base\templates\base.html:244
+#: .\base\templates\base.html:262 .\base\templates\base.html:280
+#: .\base\templates\base.html:298 .\base\templates\base.html:317
+#: .\base\templates\base.html:335 .\base\templates\base.html:422
+#: .\base\templates\home.html:3
+msgid "Ana Səhifə"
+msgstr ""
+
+#: .\base\templates\base.html:110 .\base\templates\base.html:259
+#: .\base\templates\base.html:263 .\base\templates\base.html:277
+#: .\base\templates\base.html:281 .\base\templates\base.html:424
+#: .\base\templates\home.html:70 .\base\templates\service.html:3
+#: .\base\templates\service_detail.html:3
+msgid "Xidmətlər"
+msgstr ""
+
+#: .\base\templates\base.html:117 .\base\templates\base.html:295
+#: .\base\templates\base.html:299 .\base\templates\base.html:314
+#: .\base\templates\base.html:318 .\base\templates\base.html:425
+#: .\base\templates\home.html:124 .\base\templates\product_detail.html:3
+#: .\base\templates\products.html:3
+msgid "Məhsullar"
+msgstr ""
+
+#: .\base\templates\base.html:125 .\base\templates\base.html:332
+#: .\base\templates\base.html:336 .\base\templates\base.html:426
+#: .\base\templates\contact.html:3
+msgid "Əlaqə"
+msgstr ""
+
+#: .\base\templates\base.html:418
+msgid "Keçidlər"
+msgstr ""
+
+#: .\base\templates\base.html:434 .\base\templates\base.html:443
+msgid "Ünvan"
+msgstr ""
+
+#: .\base\templates\base.html:440 .\base\templates\contact.html:55
+msgid "Telefon"
+msgstr ""
+
+#: .\base\templates\base.html:446
+msgid "Email"
+msgstr ""
+
+#: .\base\templates\contact.html:43
+msgid "Ad"
+msgstr ""
+
+#: .\base\templates\contact.html:47
+msgid "Soyad"
+msgstr ""
+
+#: .\base\templates\contact.html:51
+msgid "E-poçt"
+msgstr ""
+
+#: .\base\templates\contact.html:59
+msgid "Mesajınız"
+msgstr ""
+
+#: .\base\templates\contact.html:63 .\base\templates\product_detail.html:125
+msgid "Göndər"
+msgstr ""
+
+#: .\base\templates\home.html:57
+msgid "Ətraflı"
+msgstr ""
+
+#: .\base\templates\product_detail.html:85
+msgid "Müraciət"
+msgstr ""
+
+#: .\base\templates\product_detail.html:97
+msgid "Müraciət Edin"
+msgstr ""
+
+#: .\base\templates\service.html:23
+msgid "More"
+msgstr ""
+
+#: .\base\templates\service_detail.html:36
+msgid "Digər Xidmətlər"
+msgstr ""
+
+#: .\liderMarine\settings.py:112
+msgid "Russian"
+msgstr ""
+
+#: .\liderMarine\settings.py:113
+msgid "Azerbaijan"
+msgstr ""
+
+#: .\liderMarine\settings.py:114
+msgid "English"
+msgstr ""

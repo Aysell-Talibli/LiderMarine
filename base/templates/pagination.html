@@ -1,0 +1,25 @@
+<div class="pagination-wrapper centred">
+    <ul class="pagination clearfix">
+        
+    
+        {% if page.has_previous %}
+        <li><a href="?page=1"><i class="fa-solid fa-long-arrow-left"></i></a></li>
+      {% else %}
+        <li class="disabled"><a><i class="fa-solid fa-long-arrow-left"></i></a></li>
+      {% endif %}
+      
+      {% for num in page.paginator.page_range %}
+        {% if page.number == num %}
+          <li><a href="?page={{ num }}" class="active">{{ num }}</a></li>
+        {% else %}
+          <li><a href="?page={{ num }}">{{ num }}</a></li>
+        {% endif %}
+      {% endfor %}
+      
+      {% if page.has_next %}
+        <li><a href="?page={{ page.next_page_number }}"><i class="fa-solid fa-long-arrow-right"></i></a></li>
+      {% else %}
+        <li class="disabled"><a><i class="fa-solid fa-long-arrow-right"></i></a></li>
+      {% endif %}
+    </ul>
+</div>

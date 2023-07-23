@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %} {% trans 'Əlaqə' %} {% endblock %}
+{% block content %}
+
+<section class="contact-section">
+    <div class="auto-container">
+        <div class="row clearfix">
+            <div class="col-lg-4 col-md-6 col-sm-12 info-column">
+                <div class="content_block_6">
+                    <div class="info-inner">
+                        <h2>Əlaqə Məlumatı</h2>
+                        <ul class="info-list clearfix">
+                            <li>
+                                <i class="fa-solid fa-phone-volume"></i>
+                                {% for contact in main_contact.main_contact.all %}
+                                <p><a href="tel:{{contact.phone}}" target="_blank">{{contact.phone}}</a><br></p>
+                                        {% endfor %}
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-envelope-open-text"></i>
+                                {% for contact in main_contact.main_contact.all %}
+                                <p><a href="mailto:{{contact.email}}">{{contact.email}}</a><br></p>
+                                {% endfor %}
+                            </li>
+                            <li>
+                                {% for contact in main_contact.main_contact.all %}
+                                <i class="fa-solid fa-location-dot"></i>
+                                <p>{{contact.address}}</p>
+                                    {% endfor %}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-6 col-sm-12 form-column">
+                <div class="form-inner">
+                    <form method="post" action="{% url 'contact' %}" id="contact-form" class="default-form"
+                        novalidate="novalidate">
+                        {% csrf_token %}
+                        <div class="row clearfix">
+                            <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                                <input type="text" name="name" placeholder="{% trans 'Ad' %} *" required=""
+                                    aria-required="true" fdprocessedid="1ct0ge">
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                                <input type="text" name="surname" required="" placeholder="{% trans 'Soyad' %} *"
+                                    aria-required="true" fdprocessedid="1lf2y">
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                                <input type="email" name="email" placeholder="{% trans 'E-poçt' %} *" required=""
+                                    aria-required="true" fdprocessedid="tzeyj">
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                                <input type="text" name="phone" required="" placeholder="{% trans 'Telefon' %} *"
+                                    aria-required="true" fdprocessedid="ywnzhk">
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                <textarea name="message" placeholder="{% trans 'Mesajınız' %} ..."></textarea>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 form-group message-btn">
+                                <button class="theme-btn-one" type="submit" name="submit-form"
+                                    fdprocessedid="aywlru">{% trans 'Göndər' %}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% include 'map.html' %}
+{% endblock content %}

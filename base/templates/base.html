@@ -1,0 +1,496 @@
+{% load static %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="description" content="">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap"
+        rel="stylesheet">
+    <link href="{% static 'assets/css/font-awesome-all.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <link href="{% static 'assets/css/flaticon.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/owl.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/jquery.fancybox.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/animate.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/color.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/responsive.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="boxed_wrapper">
+
+        <!-- main header -->
+        <header class="main-header">
+            <div class="header-top">
+                <!-- header-top -->
+                <div class="auto-container">
+                    <div class="top-inner clearfix">
+                        <div class="text pull-left">
+                            <div class="support-box pull-right">
+                                <i class="fa-solid fa-phone-volume"></i>
+                                {% for contact in main_info.main_contact.all %}
+                                            {% if forloop.counter == 1 %}
+                                            <h4><a href="tel:{{contact.phone}}" target="_blank">{{contact.phone}}</a></h4>
+                                            {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="top-right pull-right">
+                            <ul class="social-links clearfix">
+                                {% for app_name in apps %}
+                                {% if app_name.app == 'fb' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-facebook-f"></span></a></li>
+                                {% endif %}
+                                {% if app_name.app == 'wp' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-whatsapp"></span></a></li>
+                                {% endif %}
+                                {% if app_name.app == 'twitter' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-twitter"></span></a></li>
+                                {% endif %}
+                                {% if app_name.app == 'insta' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-instagram"></span></a></li>
+                                {% endif %}
+                                {% if app_name.app == 'linkedin' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-linkedin"></span></a></li>
+                                {% endif %}
+                                {% if app_name.app == 'tiktok' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-tiktok"></span></a></li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- header-lower -->
+            <div class="header-lower">
+                <div class="auto-container">
+                    <div class="outer-box clearfix">
+                        <div class="logo-box pull-left">
+                            <figure class="logo"><a href="{% url 'home' %}"><img src="{{main_info.header_logo.url}}" alt=""></a>
+                            </figure>
+                        </div>
+                        <div class="menu-area">
+                            <!--Mobile Navigation Toggler-->
+                            <div class="mobile-nav-toggler">
+                                <i class="icon-bar"></i>
+                                <i class="icon-bar"></i>
+                                <i class="icon-bar"></i>
+                            </div>
+                            <nav class="main-menu navbar-expand-md navbar-light">
+                                <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
+                                    <ul class="navigation clearfix">
+                                        
+                                        <li {% if request.resolver_match.view_name == 'home' %} class= "current" {% endif %}> 
+                                            <a href="{% url 'home' %}">{% trans 'Ana Səhifə' %}</a>
+                                        </li>
+                                        
+                                        <li {% if request.resolver_match.view_name == 'about' %} class= "current" {% endif %}><a href="{% url 'about' %}">{% trans 'Haqqımızda' %}</a>
+                                        </li>
+                                        <li {% if request.resolver_match.view_name == 'service' %} class= "current" {% endif %} class="dropdown"><a href="{% url 'service' %}">{% trans 'Xidmətlər' %}</a>
+                                            <ul>
+                                                {% for s_category in service_categories %}
+                                                <li><a href="{% url 'service_category' s_category.name %}">{{s_category.name}}</a></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                        <li {% if request.resolver_match.view_name == 'products' %} class= "current" {% endif %} class="dropdown"><a href="{% url 'products' %}">{% trans 'Məhsullar' %}</a>
+                                            <ul>
+                                                {% for p_category in product_categories %}
+                                                <li><a href="{% url 'product_category' p_category.name %}">{{p_category.name}}</a></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                        
+                                        <li {% if request.resolver_match.view_name == 'contact' %} class= "current" {% endif %} ><a href="{% url 'contact' %}">{% trans 'Əlaqə' %}</a>
+                                        </li>
+                                        {% for i in LANGUAGES %}
+                                                {% if LANGUAGE_CODE == i.0 %}
+                                                    <li class="dropdown"><a href="">{{ i.0|upper }}</a>
+                                                {% endif %}
+                                            {% endfor %}
+                                        
+                                            <ul>
+                                                {% for i in LANGUAGES %}
+                                                        {% if LANGUAGE_CODE == i.0 %}
+                                                            <li><a href="{% url 'set_lang' i.0 %}">{{ i.0|upper }}</a></li>
+                                                        {% else %}
+                                                            <li><a href="{% url 'set_lang' i.0 %}"> {{ i.0|upper }}</a></li>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                        <div class="support-box pull-right">
+                            <a class="srch-btn theme-bg brd-rd3" href="#" title="" itemprop="url"><i
+                                     class="fas fa-search"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--sticky Header-->
+            <div class="sticky-header">
+                <div class="auto-container">
+                    <div class="outer-box clearfix">
+                        <div class="logo-box pull-left">
+                            <figure class="logo"><a href="{% url 'home' %}"><img src="{{main_info.header_logo.url}}" alt=""></a>
+                            </figure>
+                        </div>
+                        <div class="menu-area pull-left">
+                            <nav class="main-menu clearfix">
+                                <!--Keep This Empty / Menu will come through Javascript-->
+                            </nav>
+                        </div>
+                        <div class="support-box pull-right">
+                            <a class="srch-btn theme-bg brd-rd3" href="#" title="" itemprop="url"><i
+                                    class="fas fa-search"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- main-header end -->
+        <div class="header-search">
+            <span class="srch-cls-btn brd-rd5"><i class="fas fa-times"></i></span>
+            <form action="{% url 'products' %}" method="GET">
+                <input type="hidden" name="csrfmiddlewaretoken"
+                    value="aqeexlpveGk79R2d7iAU27IftFvOG9aw1cE5k4rNtBG7Md3fV3zyBx0FMcGnu6Zf">
+                <input type="text" name="search_query" placeholder="Search Keywords Here..." value="">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+        <!-- Mobile Menu  -->
+        <div class="mobile-menu">
+            <div class="menu-backdrop"></div>
+            <div class="close-btn"><i class="fa-brands fa-times"></i></div>
+
+            <nav class="menu-box">
+                <div class="nav-logo"><a href="{% url 'home' %}"><img src="{{main_info.header_logo.url}}" alt="" title=""></a>
+                </div>
+                <div class="menu-outer">
+                    <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+                </div>
+                <div class="social-links">
+                    <ul class="clearfix">
+                        {% for app_name in apps %}
+                                {% if app_name.app == 'fb' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-facebook-f"></span></a></li>
+                                {% endif %}
+                                {% if app_name.app == 'wp' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-whatsapp"></span></a></li>
+                                {% endif %}
+                                {% if app_name.app == 'twitter' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-twitter"></span></a></li>
+                                {% endif %}
+                                {% if app_name.app == 'insta' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-instagram"></span></a></li>
+                                {% endif %}
+                                {% if app_name.app == 'linkedin' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-linkedin"></span></a></li>
+                                {% endif %}
+                                {% if app_name.app == 'tiktok' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-tiktok"></span></a></li>
+                                {% endif %}
+                                {% endfor %}
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!-- End Mobile Menu -->
+        {% if request.resolver_match.view_name == 'home' %}
+        <div> </div>
+        {% else %}
+        {% if request.resolver_match.view_name == 'about' %}
+        <section class="page-title centred" style="{% if images.about %}background-image: url({{images.about.url}});{% endif %}">
+            <div class="overlay-bg"></div>
+            <div class="pattern-layer"></div>
+            <div class="auto-container">
+                
+                <div class="content-box">
+                    <div class="title">
+                        <h1>{% trans 'Haqqımızda' %}</h1>
+                    </div>
+                    <ul class="bread-crumb clearfix">
+                        <li><a href="{% url 'home' %}">{% trans 'Ana Səhifə' %}</a></li>
+                        <li>{% trans 'Haqqımızda' %}</li>
+                    </ul>
+                </div>
+              
+            </div>
+        </section>{% endif %}
+        {% if request.resolver_match.view_name == 'service' %}
+        <section class="page-title centred" style="{% if images.services %}background-image: url({{images.services.url}});{% endif %}">
+            <div class="overlay-bg"></div>
+            <div class="pattern-layer"></div>
+            <div class="auto-container">
+                
+                <div class="content-box">
+                    <div class="title">
+                        <h1>{% trans 'Xidmətlər' %}</h1>
+                    </div>
+                    <ul class="bread-crumb clearfix">
+                        <li><a href="{% url 'home' %}">{% trans 'Ana Səhifə' %}</a></li>
+                        <li>{% trans 'Xidmətlər' %}</li>
+                    </ul>
+                </div>
+              
+            </div>
+        </section>{% endif %}
+        {% if request.resolver_match.view_name == 'service_detail' %}
+        <section class="page-title centred" style= "{% if images.services %}background-image: url({{images.services.url}});{% endif %}">
+            <div class="overlay-bg"></div>
+            <div class="pattern-layer"></div>
+            <div class="auto-container">
+                
+                <div class="content-box">
+                    <div class="title">
+                        <h1>{% trans 'Xidmətlər' %}</h1>
+                    </div>
+                    <ul class="bread-crumb clearfix">
+                        <li><a href="{% url 'home' %}">{% trans 'Ana Səhifə' %}</a></li>
+                        <li>{% trans 'Xidmətlər' %}</li>
+                    </ul>
+                </div>
+              
+            </div>
+        </section>{% endif %}
+        {% if request.resolver_match.view_name == 'product_detail' %}
+        <section class="page-title centred" style="{% if images.products %}background-image: url({{images.products.url}});{% endif %}">
+            <div class="overlay-bg"></div>
+            <div class="pattern-layer"></div>
+            <div class="auto-container">
+                
+                <div class="content-box">
+                    <div class="title">
+                        <h1>{% trans 'Məhsullar' %}</h1>
+                    </div>
+                    <ul class="bread-crumb clearfix">
+                        <li><a href="{% url 'home' %}">{% trans 'Ana Səhifə' %}</a></li>
+                        <li>{% trans 'Məhsullar' %}</li>
+                    </ul>
+                </div>
+              
+            </div>
+        </section>{% endif %}
+        
+        {% if request.resolver_match.view_name == 'products' %}
+        <section class="page-title centred" style="{% if images.products %}background-image: url({{images.products.url}});{% endif %}">
+            <div class="overlay-bg"></div> 
+            <div class="pattern-layer"></div>
+            <div class="auto-container">
+                
+                <div class="content-box">
+                    <div class="title">
+                        <h1>{% trans 'Məhsullar' %}</h1>
+                    </div>
+                    <ul class="bread-crumb clearfix">
+                        <li><a href="{% url 'home' %}">{% trans 'Ana Səhifə' %}</a></li>
+                        <li>{% trans 'Məhsullar' %}</li>
+                    </ul>
+                </div>
+              
+            </div>
+        </section>{% endif %}
+        {% if request.resolver_match.view_name == 'contact' %}
+        <section class="page-title centred" style="{% if images.contact %}background-image: url({{images.contact.url}});{% endif %}">
+            <div class="overlay-bg"></div>
+            <div class="pattern-layer"></div>
+            <div class="auto-container">
+                
+                <div class="content-box">
+                    <div class="title">
+                        <h1>{% trans 'Əlaqə' %}</h1>
+                    </div>
+                    <ul class="bread-crumb clearfix">
+                        <li><a href="{% url 'home' %}">{% trans 'Ana Səhifə' %}</a></li>
+                        <li>{% trans 'Əlaqə' %}</li>
+                    </ul>
+                </div>
+              
+            </div>
+        </section>{% endif %}
+        {% endif %}
+        <!-- about-section -->
+        
+        <!-- newsletter-section end -->
+
+        {% block content %}
+        {% endblock %}
+        <!-- main-footer -->
+        <section class="newsletter-section">
+            <div class="auto-container">
+                <div class="row clearfix">
+                    <div class="col-lg-6 col-md-12 col-sm-12 text-column">
+                        <div class="text">
+                            <div class="icon-box"><i class="fa-solid fa-envelope-open-text"></i></div>
+                            <h4>Join our newsletter and get latest updates</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-sm-12 form-column">
+                        <form action="{% url 'home' %}" method="post" class="newsletter-form">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="email" name="email" placeholder="Email Address" required="">
+                                <button type="submit"><i class="fas fa-check"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="main-footer" style="background-image: url(assets/images/background/footer-bg-1.jpg);">
+            <figure class="footer-logo"><img src="assets/images/footer-logo.png" alt=""></figure>
+            <div class="footer-top">
+                <div class="auto-container">
+                    <div class="widget-section">
+                        <div class="row clearfix">
+                            <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
+                                <div class="footer-widget about-widget">
+                                    <div class="widget-title">
+                                        <h4>Firbrigs</h4>
+                                    </div>
+                                    <div class="text">
+                                        <p>{{main_info.footer_text}}</p>
+                                    </div>
+                                    <ul class="footer-social clearfix">
+                                        {% for app_name in apps %}
+                                {% if app_name.app == 'fb' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-facebook-f"></span></a></li>
+                                {% endif %}
+                                {% if app_name.app == 'wp' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-whatsapp"></span></a></li>
+                                {% endif %}
+                                {% if app_name.app == 'twitter' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-twitter"></span></a></li>
+                                {% endif %}
+                                {% if app_name.app == 'insta' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-instagram"></span></a></li>
+                                {% endif %}
+                                {% if app_name.app == 'linkedin' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-linkedin"></span></a></li>
+                                {% endif %}
+                                {% if app_name.app == 'tiktok' %}
+                                <li><a href="{{app_name.link}}" target="_blank"><span
+                                            class="fa-brands fa-tiktok"></span></a></li>
+                                {% endif %}
+                                {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
+                                <div class="footer-widget links-widget">
+                                    <div class="widget-title">
+                                        <h4>{% trans 'Keçidlər' %}</h4>
+                                    </div>
+                                    <div class="widget-content">
+                                        <ul class="links-list clearfix">
+                                            <li><a href="{% url 'home' %}">{% trans 'Ana Səhifə' %}</a></li>
+                                            <li><a href="{% url 'about' %}">{% trans 'Haqqımızda' %}</a></li>
+                                            <li><a href="{% url 'service' %}">{% trans 'Xidmətlər' %}</a></li>
+                                            <li><a href="{% url 'products' %}">{% trans 'Məhsullar' %}</a></li>
+                                            <li><a href="{% url 'contact' %}">{% trans 'Əlaqə' %}</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="footer-column col-lg-4 col-md-6 col-sm-12">
+                                <div class="footer-widget links-widget">
+                                    <div class="widget-title">
+                                        <h4>{% trans 'Ünvan' %}</h4>
+                                    </div>
+                                    <div class="widget-content">
+                                        <ul class="contact-info-list">
+                                            {% for contact in main_info.main_contact.all %}
+                                            {% if forloop.counter == 1 %}
+                                            <li><strong>{% trans 'Telefon' %}:</strong> {{contact.phone}} </li>
+                                            {% endif %}
+                                            {% if forloop.counter == 1 %}
+                                            <li><strong>{% trans 'Ünvan' %}:</strong> {{contact.address}}</li>
+                                            {% endif %}
+                                            {% if forloop.counter == 1 %}
+                                            <li><strong>{% trans 'Email' %}:</strong> {{contact.email}}</li>
+                                            {% endif %}
+                                            {% endfor %}
+                                            
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="auto-container clearfix">
+                    <div class="copyright text-center">
+                        <p>&copy;Copyright 2023 by <a href="https://khanbutagroup.az/" target="_blank">
+                                Khan Buta Group MMC</a></p>
+                    </div>
+
+                </div>
+            </div>
+        </footer>
+        <!-- main-footer end -->
+
+
+        <!--Scroll to top-->
+        <button class="scroll-top scroll-to-target" data-target="html">
+            <span class="fa fa-arrow-up"></span>
+        </button>
+    </div>
+
+
+    <!-- jequery plugins -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="{% static 'assets/js/jquery.js' %}"></script>
+    <script src="{% static 'assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/owl.js' %}"></script>
+    <script src="{% static 'assets/js/wow.js' %}"></script>
+    <script src="{% static 'assets/js/validation.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.fancybox.js' %}"></script>
+    <script src="{% static 'assets/js/appear.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.countTo.js' %}"></script>
+
+    <script src="{% static 'assets/js/script.js' %}"></script>
+
+</body>
+<!-- End of .page_wrapper -->
+
+</html>
